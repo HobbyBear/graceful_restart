@@ -37,11 +37,12 @@ func (c *Conn) ListenStop() {
 			unixConn *net.UnixConn
 			err      error
 		)
-		err = c.SetReadDeadline(time.Now().Add(-time.Second))
+
+		// 保证接收缓冲区还有数据
+		err = c.SetReadDeadline(time.Now())
 		if err != nil {
 			log.Error(err.Error() + "========SetReadDeadline")
 		}
-
 		raddr, err := net.ResolveUnixAddr("unix", TransferConnDomainSocket)
 		if err != nil {
 			panic(err)

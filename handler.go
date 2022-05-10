@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// todo 如何保证并发情况下，正确的关闭socket连接
 func PrintHandler(tcp *Conn) {
 	go func() {
 		for true {
